@@ -13,7 +13,7 @@ if [ -f "test" ]; then
     mv test test.old;
 fi
 
-GCC="gcc -Wall -O2 math_aero.c test.c -o test -lm"
+GCC="gcc -Wall -Werror=format-security -Werror=format -fmax-errors=3 -O2 math_aero.c test.c -o test -lm"
 
 echo $GCC;
 

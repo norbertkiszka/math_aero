@@ -520,15 +520,13 @@ double calc_CAS_from_TAS(double tas, double pressure, double a)
 double calc_cg(mass_point_t *points, size_t n)
 {
 	size_t i;
-	mass_point_t *p;
 	double dividend = 0;
 	double divisor = 0;
 	
 	for(i = 0; i < n; i++)
 	{
-		p = points + i * sizeof(mass_point_t);
-		dividend += p->distance * p->mass;
-		divisor += p->mass;
+		dividend += points[i].distance * points[i].mass;
+		divisor += points[i].mass;
 	}
 	
 	return dividend / divisor;
@@ -547,7 +545,7 @@ double calc_total_mass(mass_point_t *points, size_t n)
 	
 	for(i = 0; i < n; i++)
 	{
-		mass += (points + i * sizeof(mass_point_t))->mass;
+		mass += points[i].mass;
 	}
 	
 	return mass;
@@ -568,8 +566,8 @@ double calc_moment_of_inertia(double cg, mass_point_t *points, size_t n)
 	
 	for(i = 0; i < n; i++)
 	{
-		dist = fabs((points + i * sizeof(mass_point_t))->distance - cg);
-		moment_of_inertia += (points + i * sizeof(mass_point_t))->mass * dist * dist;
+		dist = points[i].distance - cg;
+		moment_of_inertia += points[i].mass * dist * dist;
 	}
 	
 	return moment_of_inertia;

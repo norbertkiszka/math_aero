@@ -164,15 +164,15 @@ int main(void)
 	
 	printf("Calculate air dynamic viscosity at -40 °C: %.9lf Pa/s\n", a);
 	
-	//a = calc_barometric_altitude(101325, pressure_fl350);
+	a = calc_reynold(50, 8, 0.6, 273.15 - 40);
+	
+	printf("Calculate Reynolds number at -40 °C, 50m/s, 8m, 0.6kg/m^3: %.3lf\n", a);
 	
 	a = calc_barometric_altitude(101325, pressure_fl350);
 	
 	printf("Calculate barometric altitude (pressure altitude) at FL350 with previous calculated pressure (%.9lf Pa) and QNH 101325 Pa: %.9lf ft\n", pressure_fl350, a / 0.3048);
 	
 	b = 273.15 + 15 - (0.0065 * 35000 * 0.3048);
-	
-	//a = calc_density_altitude(101325, pressure_fl350, b, 9.80665, 0);
 	
 	a = calc_density_altitude(101325, pressure_fl350, b, 9.80665, 0);
 	
@@ -233,22 +233,22 @@ int main(void)
 	mass_point_t *mps;
 	mps = calloc(3, sizeof(mass_point_t));
 	
-	mps->distance = 1;
-	mps->mass = 12;
+	mps[0].distance = 1;
+	mps[0].mass = 12;
 	
-	mps[sizeof(mass_point_t)].distance = 2;
-	mps[sizeof(mass_point_t)].mass = 16.5;
+	mps[1].distance = 2;
+	mps[1].mass = 16.5;
 	
-	mps[sizeof(mass_point_t)*2].distance = 3;
-	mps[sizeof(mass_point_t)*2].mass = 44;
+	mps[2].distance = 3;
+	mps[2].mass = 44;
 	
 	printf("Mass points for later calculations (distance from nose in meters / mass in kg):\n");
 	
-	printf("1: %.2lf / %.2lf\n", mps->distance, mps->mass);
+	printf("1: %.2lf / %.2lf\n", mps[0].distance, mps[0].mass);
 	
-	printf("2: %.2lf / %.2lf\n", (mps + sizeof(mass_point_t))->distance, (mps + sizeof(mass_point_t))->mass);
+	printf("2: %.2lf / %.2lf\n", mps[1].distance, mps[1].mass);
 	
-	printf("3: %.2lf / %.2lf\n", (mps + 2 * sizeof(mass_point_t))->distance, (mps + 2 * sizeof(mass_point_t))->mass);
+	printf("3: %.2lf / %.2lf\n", mps[2].distance, mps[2].mass);
 	
 	d = calc_cg(mps, 3);
 	
