@@ -2,7 +2,7 @@
 
 This is a library for aerodynamic, metrology and physics calculations. Same calculations as used in ADC and other aircraft computers. This also can be used in flight simulations.
 
-Whole library was made with idea to made calculations incredibly precise (calculation error 0.1% at worst case - especially calc_dew_point() function) and fast as possible (for less CPU time usage).
+Whole library was made with idea to make calculations incredibly precise (calculation error 0.1% at worst case - especially calc_dew_point() function) and fast as possible (for less CPU time usage).
 
 Most of used equations/methods are well known. Some are made by me to achieve better accuracy (less error) - especially with calculation of denisty altitude (true altitude).
 
